@@ -4,17 +4,32 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Focus Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Parisienne&family=Sen:wght@400..800&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Parisienne&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sen:wght@400..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="bg-black text-white flex items-center justify-center h-screen">
-
-    <main class="text-center">
-        <h1 class="text-8xl font-bold">18:14</h1>
-
-        <h2 class="text-5xl">Good evening, Ojas.</h2>
+<body class="flex justify-center items-center h-screen bg-black">
+    <div class="absolute inset-0 z-0 bg-[url('assets/Night%20Sky.png')] bg-cover bg-center" role="img"
+        aria-label="Night Sky Background"></div>
+    <div class="absolute inset-0 z-10 bg-black/40"></div>
+    <main
+        class="p-6 md:p-8 z-20 relative bg-gray-900/80 rounded-lg max-w-xl w-full text-white flex  flex-col items-center"
+        id="dashboard">
+        <h1 id="clock" class="text-8xl font-bold font-['Poppins'] text-shadow-[0_0_15px_rgba(255,255,255,0.2)]">06:30
+        </h1>
+        <p id="greeting" class="text-2xl mt-4 font-['Poppins'] font-semibold tracking-tight">Good Evening, Ojas</p>
     </main>
-
 </body>
 
 </html>
