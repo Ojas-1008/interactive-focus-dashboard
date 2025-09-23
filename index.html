@@ -1,10 +1,11 @@
+<!-- Dashboard HTML entry point -->
 <!doctype html>
 <html>
 
-<head>
+<head> <!-- Head: meta, fonts, styles -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interactive Focus Dashboard</title>
+    <title>Interactive Focus Dashboard</title> <!-- Page Title -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,23 +17,51 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Parisienne&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sen:wght@400..800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css"> <!-- Custom styles -->
 </head>
 
-<body class="flex justify-center items-center h-screen bg-black">
+<body class="flex justify-center items-center h-screen bg-black"> <!-- Centered dashboard -->
+    <!-- Background image -->
     <div class="absolute inset-0 z-0 bg-[url('assets/Night%20Sky.png')] bg-cover bg-center" role="img"
         aria-label="Night Sky Background"></div>
+    <!-- Overlay -->
     <div class="absolute inset-0 z-10 bg-black/40"></div>
     <main
-        class="p-6 md:p-8 z-20 relative bg-black/30 backdrop-blur-sm rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.6)]  border border-white/40 max-w-xl w-full text-white/65 flex  flex-col items-center"
+        class="p-6 md:p-8 z-20 relative bg-black/20 backdrop-blur-sm rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.6)]  border border-white/40 max-w-xl w-full text-white/65 flex  flex-col items-center right-50"
         id="dashboard">
+        <!-- Clock display -->
         <h1 id="clock"
             class="text-8xl font-bold font-['Poppins'] text-shadow-[0_0_15px_rgba(255,255,255,0.25)] tracking-tight">
             06:30
         </h1>
+        <!-- Greeting message -->
         <p id="greeting" class="text-2xl mt-6 font-['Poppins'] font-medium tracking-tight text-white/90"></p>
     </main>
-    <script src="script.js"></script>
+
+    <section
+        class="list-container z-20 bg-black/10 backdrop-blur-sm rounded-2xl shadow-lg border border-white/40 max-w-md w-full p-6 absolute top-10 right-10">
+        <h2 class="text-3xl font-bold text-white/90 mb-4 text-center font-['Poppins']">To-Do List</h2>
+        <form id="to-do-list" class="flex gap-3 mb-4">
+            <input type="text" placeholder="Add a new task..." id="input"
+                class="flex-1 bg-white/10 text-white px-4 py-2 rounded-lg placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-600 border border-white/20">
+            <button type="submit" id="submit-btn"
+                class="bg-blue-800 px-5 py-2 hover:bg-blue-700 text-white font-semibold rounded-lg border border-white/20 transition-colors">Add</button>
+        </form>
+        <ul id="task-list" class="space-y-2">
+            <!-- <li
+                class="list-items flex items-center bg-white/10 rounded-lg px-4 py-2 border border-white/20 hover:bg-white/20 transition-colors">
+                <span class="task-text flex-1 text-white/90">Example Task</span>
+                <button class="delete-btn text-white/70 hover:text-red-800/80 transition-colors focus:outline-none"><i class="fas fa-trash delete-icon"></i></button>
+            </li> -->
+        </ul>
+    </section>
+    <script src="script.js"></script> <!-- Dashboard logic -->
+    <!-- End body -->
 </body>
+
+<!-- End HTML -->
 
 </html>
