@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const formElement = document.getElementById('to-do-list');
     const inputField = document.getElementById('input');
     const taskList = document.getElementById('task-list');
+    let taskArray = [];
+    // console.log(taskArray);
+    const taskStorageKey = 'interactive_dashboard_tasks';
 
     function updateClock() {
         const date = new Date();
@@ -65,48 +68,104 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function renderTasks() {
+
+        taskList.innerHTML = '';
+
+        taskArray.forEach(element => {
+            if (taskArray) {
+                // console.log(element);
+                const taskItem = document.createElement('li');
+                const taskText = document.createElement('span');
+                const deleteBtn = document.createElement('button');
+                const deleteIcon = document.createElement('i');
+
+                taskItem.classList = 'list-items flex items-center bg-white/10 rounded-lg px-4 py-2 border border-white/20 hover:bg-white/30 transition-colors';
+                // console.log(taskItem);
+                taskText.classList = 'task-text flex-1 text-white/90';
+                // console.log(taskText);
+                taskText.textContent = element;
+                deleteBtn.classList = 'delete-btn text-white/70 hover:text-red-800/80 transition-colors focus:outline-none';
+                deleteIcon.classList = 'fas fa-trash delete-icon';
+                deleteBtn.appendChild(deleteIcon);
+                taskItem.appendChild(taskText);
+                // console.log(taskItem);
+                taskItem.appendChild(deleteBtn);
+                taskList.appendChild(taskItem);
+                // console.log(taskList);
+            }
+        });
+    }
+
+    function loadTasks() {
+        const storedTasks = localStorage.getItem(taskStorageKey);
+        if (storedTasks) {
+            taskArray = JSON.parse(storedTasks);
+        }
+
+        renderTasks();
+    }
+
+    function saveTasks() {
+        localStorage.setItem(taskStorageKey, JSON.stringify(taskArray));
+    }
+
     function addTask(event) {
         // console.log(event);
         event.preventDefault();
         // console.log(event.target[0].value);
         // const task = event.target[0].value;
         // console.log(typeof(task));
-        const task = inputField.value.trim();
+        const newTask = inputField.value.trim();
 
-        if (task) {
-            const taskItem = document.createElement('li');
-            const taskText = document.createElement('span');
-            const deleteBtn = document.createElement('button');
-            const deleteIcon = document.createElement('i');
-
-            taskItem.classList = 'list-items flex items-center bg-white/10 rounded-lg px-4 py-2 border border-white/20 hover:bg-white/30 transition-colors';
-            // console.log(taskItem);
-            taskText.classList = 'task-text flex-1 text-white/90';
-            // console.log(taskText);
-            taskText.textContent = task;
-            deleteBtn.classList = 'delete-btn text-white/70 hover:text-red-800/80 transition-colors focus:outline-none';
-            deleteIcon.classList = 'fas fa-trash delete-icon';
-            deleteBtn.appendChild(deleteIcon);
-            taskItem.appendChild(taskText);
-            // console.log(taskItem);
-            taskItem.appendChild(deleteBtn);
-            taskList.appendChild(taskItem);
-            // console.log(taskList);
+        if (newTask) {
+            taskArray.push(newTask);
+            // console.log(taskArray);
+            saveTasks();
+            renderTasks();
             inputField.value = '';
             inputField.focus();
         }
+
+        // if (task) {
+        //     const taskItem = document.createElement('li');
+        //     const taskText = document.createElement('span');
+        //     const deleteBtn = document.createElement('button');
+        //     const deleteIcon = document.createElement('i');
+
+        //     taskItem.classList = 'list-items flex items-center bg-white/10 rounded-lg px-4 py-2 border border-white/20 hover:bg-white/30 transition-colors';
+        //     // console.log(taskItem);
+        //     taskText.classList = 'task-text flex-1 text-white/90';
+        //     // console.log(taskText);
+        //     taskText.textContent = task;
+        //     deleteBtn.classList = 'delete-btn text-white/70 hover:text-red-800/80 transition-colors focus:outline-none';
+        //     deleteIcon.classList = 'fas fa-trash delete-icon';
+        //     deleteBtn.appendChild(deleteIcon);
+        //     taskItem.appendChild(taskText);
+        //     // console.log(taskItem);
+        //     taskItem.appendChild(deleteBtn);
+        //     taskList.appendChild(taskItem);
+        //     // console.log(taskList);
+        //     inputField.value = '';
+        //     inputField.focus();
+        // }
     }
 
     function deleteTask(event) {
         // console.log(event);
         // console.log(event.target);
         // console.log(itemToDelete);
-        if (event.target.classList.contains('delete-icon' || 'delete-btn')) {
+        if (event.target.closest('.delete-btn')) {
             const itemToDelete = event.target.closest('li');
-            itemToDelete.remove();
+            const textToDelete = itemToDelete.querySelector('.task-text').textContent;
+            taskArray = taskArray.filter(task => task !== textToDelete);
+            saveTasks();
+            // itemToDelete.remove();
+            renderTasks();
         }
     }
 
     formElement.addEventListener('submit', addTask);
     taskList.addEventListener('click', deleteTask);
+    loadTasks();
 });
